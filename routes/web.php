@@ -13,3 +13,13 @@
 $router->get('/', function() use ($router) {
 	return view('index');
 });
+
+$router->get('/game/listing', [
+	'uses' => 'GameController@listing',
+	'as' => 'game.listing'
+]);
+
+$router->get('/game[/{id}]', [
+	'uses' => 'GameController@index',
+	'as' => 'game.index'
+]);
