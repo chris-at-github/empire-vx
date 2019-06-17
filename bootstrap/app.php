@@ -48,6 +48,19 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
+| Register Configuration
+|--------------------------------------------------------------------------
+|
+| Load all configurations files from /config/ folder.
+| @see: https://laracasts.com/discuss/channels/lumen/lumen-config-folder-is-missing
+|
+*/
+collect(scandir(__DIR__ . '/../config'))->each(function($item) use ($app) {
+	$app->configure(basename($item, '.php'));
+});
+
+/*
+|--------------------------------------------------------------------------
 | Register Middleware
 |--------------------------------------------------------------------------
 |
@@ -75,6 +88,7 @@ $app->singleton(
 | totally optional, so you are not required to uncomment this line.
 |
 */
+$app->register(App\Providers\EmpireServiceProvider::class);
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
