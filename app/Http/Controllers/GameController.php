@@ -6,7 +6,9 @@ class GameController extends Controller {
 
 	public function listing() {
 
-		app(\App\Managers\GameManager::class)->get('e329b8fd-cdb9-45f1-b0b1-57a7d142e1f1');
+		$games = app(\App\Managers\GameManager::class)->find();
+
+		dd($games);
 //		return view('game/listing', [
 //			'games' => [
 //				'e329b8fd-cdb9-45f1-b0b1-57a7d142e1f1' => [
