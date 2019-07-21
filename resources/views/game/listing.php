@@ -7,7 +7,7 @@
 	<?php if(empty($games) === false) { ?>
 		<ul>
 			<?php foreach($games as $game) { ?>
-				<li><a href="<?php echo route('game.index', ['id' => $game['id']]); ?>"><?php echo $game['name']; ?></a></li>
+				<li><a href="<?php echo route('game.index', ['id' => $game->getId()]); ?>"><?php echo $game->getName(); ?></a></li>
 			<?php } ?>
 		</ul>
 	<?php } ?>
