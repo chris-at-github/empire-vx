@@ -14,6 +14,11 @@ $router->get('/', function() use ($router) {
 	return view('index');
 });
 
+$router->get('/game/dashboard', [
+	'uses' => 'GameController@dashboard',
+	'as' => 'game.dashboard'
+]);
+
 $router->get('/game/listing', [
 	'uses' => 'GameController@listing',
 	'as' => 'game.listing'

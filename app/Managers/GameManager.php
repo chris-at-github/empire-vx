@@ -9,6 +9,19 @@ use App\Factories\GameFactory;
 class GameManager {
 
 	/**
+	 * @param object $data
+	 * @return array
+	 */
+	protected function getProperties($data) {
+		$properties = [
+			'id' => $data->id
+		];
+		$properties = array_merge($properties, json_decode($data->properties, true));
+
+		return $properties;
+	}
+
+	/**
 	 * @param array $options
 	 * @param array $sorting
 	 * @param array $processors
@@ -34,8 +47,7 @@ class GameManager {
 		$data = DB::table('games')->where('id', $id)->first();
 
 		if(empty($data) === false) {
-			$game = app(GameFactory::class)->create($data->namespace, json_decode($data->properties));
-			dd($game);
+			$game = app(GameFactory::class)->create($data->namespace, $this->getProperties($data));
 		}
 	}
 }

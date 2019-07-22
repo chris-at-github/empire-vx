@@ -9,7 +9,7 @@ abstract class AbstractModel {
 	 */
 	protected $id;
 
-		/**
+	/**
 	 * @return string
 	 */
 	public function getId() {
