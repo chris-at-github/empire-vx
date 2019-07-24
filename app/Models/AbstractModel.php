@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-abstract class AbstractModel {
+use Illuminate\Contracts\Support\Arrayable;
+
+abstract class AbstractModel implements Arrayable {
 
 	/**
 	 * @var string

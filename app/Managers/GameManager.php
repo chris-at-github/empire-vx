@@ -12,7 +12,7 @@ class GameManager {
 	 * @param object $data
 	 * @return array
 	 */
-	protected function getProperties($data) {
+	protected function mergeProperties($data) {
 		$properties = [
 			'id' => $data->id
 		];
@@ -34,7 +34,7 @@ class GameManager {
 		$data = DB::table('games')->get();
 
 		foreach ($data as $value) {
-			$games->put($value->id, app(GameFactory::class)->create($value->namespace, json_decode($value->properties)));
+			$games->put($value->id, app(GameFactory::class)->create($value->namespace, $this->mergeProperties($value)));
 		}
 
 		return $games;
@@ -42,12 +42,16 @@ class GameManager {
 
 	/**
 	 * @param string $id
+	 * @return \App\Models\GameModel|null
 	 */
 	public function get($id) {
+		$game = null;
 		$data = DB::table('games')->where('id', $id)->first();
 
 		if(empty($data) === false) {
-			$game = app(GameFactory::class)->create($data->namespace, $this->getProperties($data));
+			$game = app(GameFactory::class)->create($data->namespace, $this->mergeProperties($data));
 		}
+
+		return $game;
 	}
 }

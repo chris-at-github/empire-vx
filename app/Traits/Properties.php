@@ -19,4 +19,21 @@ trait Properties {
 			}
 		}
 	}
+
+	/**
+	 * @return array
+	 */
+	public function toArray() {
+		$properties = [];
+
+		foreach(get_object_vars($this) as $key => $value) {
+			$method = 'get' . Str::studly($key);
+
+			if(method_exists($this, $method) === true) {
+				$properties[$key] = $this->{$method}($value);
+			}
+		}
+
+		return $properties;
+	}
 }
